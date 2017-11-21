@@ -258,3 +258,6 @@ endif
 # as environment variables, and convert them to Makefile format.
 artifacts/make/go/env.in:
 	env -i $(shell go env) | sed -n 's/^\([^=]*\)=\(..*\)/\1 ?= \2/gp' > "$@"
+
+src/%/ginkgo_test.go:
+	curl --show-error --fail --create-dirs '-#Lo' "$@" "https://jmalloc.github.io/makefiles/go/ginkgo_test.go?nonce=$(shell date +%s)"

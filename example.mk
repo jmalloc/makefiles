@@ -6,4 +6,4 @@ DOCKER_REPO := "my-org/my-repo"
 -include artifacts/make/docker/Makefile
 
 artifacts/make/%/Makefile:
-	curl -sf https://jmalloc.github.io/makefiles | bash /dev/stdin $*
+	curl -sf https://jmalloc.github.io/makefiles/fetch | bash /dev/stdin $*
