@@ -1,0 +1,1 @@
+curl --create-dirs '-#Lo' "artifacts/make/$1/Makefile" "https://jmalloc.github.io/makefiles/$1/Makefile?nonce=$(date +%s)"
