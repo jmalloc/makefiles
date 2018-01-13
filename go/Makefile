@@ -31,7 +31,7 @@ MATRIX_ARCH ?= $(GOHOSTARCH)
 
 # Arguments passed to "go build" for debug / release builds.
 DEBUG_ARGS   ?= -v
-RELEASE_ARGS ?= -v -ldflags "-s -w"
+RELEASE_ARGS ?= -v -ldflags "-s -w" -tags release
 
 # Arguments passed to "go test".
 TEST_ARGS ?=
