@@ -86,7 +86,7 @@ DOCKER_REQ += $(addprefix artifacts/build/release/linux/amd64/,$(_BINS))
 
 # Run all tests.
 .PHONY: test
-test: vendor $(REQ) | $(USE)
+test: vendor $(_SRC) $(REQ) | $(USE)
 	go test $(TEST_ARGS) ./src/...
 
 # Build debug executables for the current OS and architecture.
@@ -188,7 +188,7 @@ glide.lock: glide.yaml | $(GLIDE)
 glide.yaml: | $(GLIDE)
 	$(GLIDE_EXEC) init --non-interactive
 
-artifacts/build/%: vendor $(REQ) $(_SRC) | $(USE)
+artifacts/build/%: vendor $(_SRC) $(REQ) | $(USE)
 	$(eval PARTS := $(subst /, ,$*))
 	$(eval BUILD := $(word 1,$(PARTS)))
 	$(eval OS    := $(word 2,$(PARTS)))
