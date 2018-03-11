@@ -183,6 +183,7 @@ vendor: glide.lock | $(GLIDE)
 
 glide.lock: glide.yaml | $(GLIDE)
 	$(GLIDE_EXEC) update --strip-vendor
+	@touch glide.lock
 	@touch vendor
 
 glide.yaml: | $(GLIDE)
