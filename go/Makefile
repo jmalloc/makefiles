@@ -237,7 +237,6 @@ artifacts/logs/lint: vendor $(_SRC) $(REQ) | $(MISSPELL) $(GOMETALINTER) $(USE)
 		--enable=vetshadow \
 		--enable=ineffassign \
 		--enable=deadcode \
-		--enable=gosimple \
 		--enable=gofmt \
 		./src/... | tee -a "$@"
 
