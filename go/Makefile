@@ -193,12 +193,13 @@ artifacts/build/%: vendor $(_SRC) $(REQ) | $(USE)
 	$(eval PARTS := $(subst /, ,$*))
 	$(eval BUILD := $(word 1,$(PARTS)))
 	$(eval OS    := $(word 2,$(PARTS)))
-	$(eval ARCH  := $(word 3,$(PARTS)))
+	$(eval ARCH  := $(patsubst arm%,arm,$(word 3,$(PARTS))))
+	$(eval GOARM := $(patsubst arm%,%,$(filter arm%,$(word 3,$(PARTS)))))
 	$(eval BIN   := $(word 4,$(PARTS)))
 	$(eval PKG   := $(basename $(BIN)))
 	$(eval ARGS  := $(if $(findstring debug,$(BUILD)),$(DEBUG_ARGS),$(RELEASE_ARGS)))
 
-	CGO_ENABLED=$(CGO_ENABLED) GOOS="$(OS)" GOARCH="$(ARCH)" go build $(ARGS) -o "$@" "./src/cmd/$(PKG)"
+	CGO_ENABLED=$(CGO_ENABLED) GOOS="$(OS)" GOARCH="$(ARCH)" GOARM="$(GOARM)" go build $(ARGS) -o "$@" "./src/cmd/$(PKG)"
 
 artifacts/archives/$(PROJECT_NAME)-%.tar.gz: $$(addprefix artifacts/build/release/$$(subst -,/,$$*)/,$(_BINS))
 	@mkdir -p "$(@D)"
